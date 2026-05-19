@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>with Z skin — Your Skin. Our Science.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet"/>
+<style>
+/* ─────────────────────────────────────────
+   FOUNDATION
+───────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:#09090b;color:#F2EDE6;
+  font-family:'Jost',sans-serif;font-weight:300;
+  overflow-x:hidden;cursor:none;
+}
+
+/* ─────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────── */
+:root{
+  --void:#09090b;
+  --void-2:#0f0f11;
+  --void-3:#151517;
+  --void-4:#1c1c1f;
+  --parchment:#F2EDE6;
+  --sand:#D3C3AF;
+  --blush:#9B7A76;
+  --gold:#C4A35A;
+  --gold-hi:#D9BB78;
+  --sage:#6A8566;
+
+  --b1:rgba(242,237,230,.07);
+  --b2:rgba(242,237,230,.13);
+  --b3:rgba(242,237,230,.22);
+
+  --serum:#C4A35A;
+  --spf:#D4A837;
+  --moist:#6A9E6E;
+  --cleanse:#5AABB9;
+}
+
+/* ─────────────────────────────────────────
+   FILM-GRAIN OVERLAY
+───────────────────────────────────────── */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:180px 180px;
+  opacity:.022;mix-blend-mode:screen;
+}
+
+/* ─────────────────────────────────────────
+   CURSOR
+───────────────────────────────────────── */
+#cur{position:fixed;top:0;left:0;z-index:9999;pointer-events:none}
+#cur-d{
+  position:absolute;width:7px;height:7px;
+  background:var(--parchment);border-radius:50%;
+  transform:translate(-50%,-50%);transition:background .3s,transform .15s;
+}
+#cur-r{
+  position:absolute;width:38px;height:38px;
+  border:1px solid rgba(242,237,230,.35);border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width .45s cubic-bezier(.16,1,.3,1),height .45s cubic-bezier(.16,1,.3,1),border-color .3s;
+}
+body.hov #cur-r{width:62px;height:62px;border-color:var(--gold)}
+body.hov #cur-d{background:var(--gold);transform:translate(-50%,-50%) scale(0)}
+
+/* ─────────────────────────────────────────
+   PROGRESS BAR
+───────────────────────────────────────── */
+#prog{
+  position:fixed;top:0;left:0;z-index:9998;
+  height:1px;width:0;
+  background:linear-gradient(90deg,var(--blush),var(--gold),var(--sage));
+  transition:width .05s linear;
+}
+
+/* ─────────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:30px 68px;
+  transition:all .5s cubic-bezier(.16,1,.3,1);
+}
+#nav.on{
+  padding:18px 68px;
+  background:rgba(9,9,11,.9);
+  backdrop-filter:blur(28px) saturate(1.6);
+  border-bottom:1px solid var(--b1);
+}
+.n-logo{text-decoration:none;display:flex;align-items:baseline;gap:0}
+.n-logo-script{
+  font-family:'Great Vibes',cursive;font-size:1.55rem;
+  color:var(--parchment);line-height:1;
+}
+.n-logo-z{
+  font-family:'Cormorant Garamond',serif;font-size:2rem;font-style:italic;font-weight:500;
+  color:var(--gold);margin:0 3px;line-height:1;
+}
+.n-links{display:flex;gap:44px;list-style:none}
+.n-links a{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(242,237,230,.42);text-decoration:none;
+  position:relative;transition:color .3s;
+}
+.n-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:1px;background:var(--gold);transition:width .35s;
+}
+.n-links a:hover{color:var(--parchment)}
+.n-links a:hover::after{width:100%}
+.n-shop{
+  font-family:'Jost',sans-serif;font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--void);background:var(--parchment);border:none;
+  padding:12px 30px;cursor:none;position:relative;overflow:hidden;
+  transition:color .4s;font-weight:500;
+}
+.n-shop::before{
+  content:'';position:absolute;inset:0;background:var(--gold);
+  transform:translateX(-101%);transition:transform .45s cubic-bezier(.16,1,.3,1);
+}
+.n-shop span{position:relative;z-index:1}
+.n-shop:hover::before{transform:translateX(0)}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+#hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:55% 45%;
+}
+
+/* Atmospheric blobs */
+.atm{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none}
+.atm-a{width:800px;height:800px;background:radial-gradient(circle,rgba(155,122,118,.11),transparent 65%);top:-250px;right:-250px;animation:atmdrift 15s ease-in-out infinite alternate}
+.atm-b{width:600px;height:600px;background:radial-gradient(circle,rgba(196,163,90,.07),transparent 65%);bottom:-150px;left:-150px;animation:atmdrift 11s ease-in-out infinite alternate-reverse}
+.atm-c{width:350px;height:350px;background:radial-gradient(circle,rgba(106,133,102,.07),transparent 65%);top:55%;right:28%;animation:atmdrift 9s ease-in-out infinite alternate}
+@keyframes atmdrift{0%{transform:translate(0,0)}100%{transform:translate(30px,-45px)}}
+
+/* Left column */
+.hero-l{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:160px 70px 100px;position:relative;z-index:2;
+}
+
+.h-eyebrow{
+  display:inline-flex;align-items:center;gap:14px;
+  font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:48px;
+  opacity:0;animation:fadeup .8s cubic-bezier(.16,1,.3,1) forwards .15s;
+}
+.h-eyebrow::before{content:'';width:34px;height:1px;background:var(--gold)}
+
+.h-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(68px,7vw,118px);
+  font-weight:400;line-height:.88;letter-spacing:-.03em;
+  margin-bottom:38px;
+}
+.h-title .row{display:block;overflow:hidden}
+.h-title .row-in{
+  display:block;
+  opacity:0;transform:translateY(105%);
+  animation:rowrise .95s cubic-bezier(.16,1,.3,1) forwards;
+}
+.r0{animation-delay:.3s}.r1{animation-delay:.44s}.r2{animation-delay:.58s}
+.h-title em{font-style:italic;color:var(--sand)}
+.h-title .z-gold{
+  color:var(--gold);font-style:italic;position:relative;display:inline-block;
+}
+.h-title .z-gold::after{
+  content:'';position:absolute;
+  bottom:12px;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+
+.h-tag{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(22px,2.2vw,34px);
+  color:rgba(242,237,230,.32);
+  margin-bottom:52px;
+  opacity:0;animation:fadeup .8s cubic-bezier(.16,1,.3,1) forwards .72s;
+}
+
+.h-copy{
+  max-width:420px;font-size:.88rem;line-height:2.1;
+  color:rgba(242,237,230,.4);margin-bottom:58px;
+  opacity:0;animation:fadeup .8s cubic-bezier(.16,1,.3,1) forwards .88s;
+}
+.h-copy p{margin-bottom:.1em}
+
+.h-ctas{
+  display:flex;gap:16px;flex-wrap:wrap;
+  opacity:0;animation:fadeup .8s cubic-bezier(.16,1,.3,1) forwards 1.04s;
+}
+.btn-p{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--parchment);color:var(--void);
+  padding:16px 38px;font-family:'Jost',sans-serif;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  text-decoration:none;border:none;cursor:none;
+  position:relative;overflow:hidden;transition:color .4s;
+}
+.btn-p::before{
+  content:'';position:absolute;inset:0;background:var(--gold);
+  transform:translateX(-101%);transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.btn-p span{position:relative;z-index:1;display:flex;align-items:center;gap:10px}
+.btn-p:hover::before{transform:translateX(0)}
+.btn-g{
+  display:inline-flex;align-items:center;gap:12px;
+  background:transparent;color:var(--parchment);
+  padding:16px 38px;font-family:'Jost',sans-serif;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:300;
+  text-decoration:none;border:1px solid var(--b2);cursor:none;
+  transition:border-color .3s,background .3s;
+}
+.btn-g:hover{border-color:var(--parchment);background:rgba(242,237,230,.04)}
+
+/* Scroll cue */
+.h-scroll{
+  position:absolute;bottom:44px;left:70px;
+  display:flex;align-items:center;gap:16px;z-index:2;
+  opacity:0;animation:fadeup .7s cubic-bezier(.16,1,.3,1) forwards 1.3s;
+}
+.hs-bar{position:relative;width:48px;height:1px;background:var(--b2);overflow:hidden}
+.hs-bar::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:var(--gold);animation:scanline 2.4s ease infinite;
+}
+@keyframes scanline{0%{left:-100%}60%{left:0}100%{left:100%}}
+.hs-lbl{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,230,.22)}
+
+/* Right column — hero visual */
+.hero-r{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-r-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+
+/* Concentric rings */
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(242,237,230,.05)}
+.ring-1{width:min(56vw,500px);height:min(56vw,500px);animation:spin 50s linear infinite}
+.ring-2{width:min(42vw,370px);height:min(42vw,370px);border-color:rgba(196,163,90,.07);animation:spin 32s linear infinite reverse}
+.ring-3{width:min(28vw,240px);height:min(28vw,240px);animation:spin 20s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* Ghost Z */
+.ghost-z{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(260px,28vw,420px);
+  font-weight:600;font-style:italic;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(242,237,230,.05);
+  position:absolute;user-select:none;line-height:1;
+  animation:z-enter 1.4s cubic-bezier(.16,1,.3,1) forwards .6s,z-breathe 8s ease-in-out 2s infinite;
+  opacity:0;
+}
+@keyframes z-enter{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+@keyframes z-breathe{0%,100%{transform:scale(1) rotate(-1.5deg)}50%{transform:scale(1.05) rotate(1.5deg)}}
+
+/* Mini product tiles */
+.hero-tiles{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  position:relative;z-index:1;
+  opacity:0;animation:fadeup .9s cubic-bezier(.16,1,.3,1) forwards 1.1s;
+}
+.htile{
+  background:rgba(21,21,23,.92);
+  border:1px solid var(--b1);
+  padding:20px 18px;backdrop-filter:blur(16px);
+  position:relative;overflow:hidden;
+  transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .3s;cursor:none;
+}
+.htile:hover{transform:translateY(-6px);border-color:var(--b2)}
+.htile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
+.ht-a::after{background:var(--serum)}.ht-b::after{background:var(--spf)}
+.ht-c::after{background:var(--moist)}.ht-d::after{background:var(--cleanse)}
+.htile-cat{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,230,.28);margin-bottom:6px}
+.htile-name{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--parchment);line-height:1.2}
+.htile-dot{width:22px;height:22px;border-radius:50%;position:absolute;top:14px;right:14px;opacity:.45}
+.td-a{background:var(--serum)}.td-b{background:var(--spf)}
+.td-c{background:var(--moist)}.td-d{background:var(--cleanse)}
+
+/* Keyframes */
+@keyframes fadeup{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rowrise{from{opacity:0;transform:translateY(105%)}to{opacity:1;transform:translateY(0)}}
+
+/* ─────────────────────────────────────────
+   TICKER
+───────────────────────────────────────── */
+.ticker{
+  border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);
+  background:var(--void-2);padding:17px 0;overflow:hidden;
+}
+.ticker-track{display:flex;animation:tick 32s linear infinite}
+.ticker-seg{
+  display:flex;align-items:center;flex-shrink:0;
+  white-space:nowrap;
+}
+.tick-w{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,237,230,.22);padding:0 36px}
+.tick-gem{display:inline-block;width:4px;height:4px;background:var(--gold);border-radius:50%;margin:0 8px;opacity:.5;vertical-align:middle}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─────────────────────────────────────────
+   SHARED SECTION UTILITIES
+───────────────────────────────────────── */
+.wrap{max-width:1320px;margin:0 auto;padding:130px 68px}
+
+.kicker{
+  display:inline-flex;align-items:center;gap:14px;
+  font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:36px;
+}
+.kicker::before{content:'';display:inline-block;width:28px;height:1px;background:var(--gold)}
+
+.sec-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(44px,5vw,80px);
+  font-weight:400;line-height:1.02;letter-spacing:-.025em;
+  margin-bottom:22px;
+}
+.sec-h em{font-style:italic;color:var(--sand)}
+
+.sec-p{font-size:.87rem;line-height:2;color:rgba(242,237,230,.4);max-width:500px}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(38px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}.d6{transition-delay:.42s}
+
+/* ─────────────────────────────────────────
+   STORY
+───────────────────────────────────────── */
+#story{background:var(--void-2)}
+.story-g{display:grid;grid-template-columns:1fr 1fr;gap:110px;align-items:center}
+
+.beliefs{margin-top:64px}
+.belief{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 0;border-bottom:1px solid var(--b1);cursor:none;
+}
+.belief:first-child{border-top:1px solid var(--b1)}
+.belief-t{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.18rem;font-style:italic;color:rgba(242,237,230,.52);
+  transition:color .3s;
+}
+.belief-arr{color:var(--gold);opacity:0;transform:translateX(-8px);transition:opacity .3s,transform .3s}
+.belief:hover .belief-t{color:var(--parchment)}
+.belief:hover .belief-arr{opacity:1;transform:none}
+
+.story-visual{position:relative}
+.sv-frame{
+  width:100%;aspect-ratio:3/4;
+  background:var(--void-3);border:1px solid var(--b1);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.sv-z{
+  font-family:'Cormorant Garamond',serif;
+  font-size:290px;font-weight:600;font-style:italic;
+  color:transparent;-webkit-text-stroke:1px rgba(242,237,230,.06);
+  user-select:none;
+  animation:svz 9s ease-in-out infinite;
+}
+@keyframes svz{0%,100%{transform:rotate(-4deg) scale(1)}50%{transform:rotate(4deg) scale(1.06)}}
+.sv-gold-line{
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.sv-caption{
+  position:absolute;bottom:28px;left:0;right:0;text-align:center;
+  font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,230,.18);
+}
+.sv-stats{
+  position:absolute;right:-30px;bottom:80px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.sv-stat{
+  background:var(--void);border:1px solid var(--b1);
+  padding:14px 20px;min-width:138px;
+}
+.sv-num{font-family:'Cormorant Garamond',serif;font-size:1.65rem;color:var(--parchment)}
+.sv-lbl{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,230,.28);margin-top:4px}
+
+/* ─────────────────────────────────────────
+   PRODUCTS
+───────────────────────────────────────── */
+#products{background:var(--void)}
+.prod-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:80px;gap:40px}
+.prod-hdr-r{font-size:.84rem;line-height:1.95;color:rgba(242,237,230,.36);max-width:280px;text-align:right}
+
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+
+.pc{background:var(--void-3);position:relative;overflow:hidden;cursor:none}
+.pc-in{
+  padding:50px 34px;display:flex;flex-direction:column;min-height:570px;
+  transition:background .45s;
+}
+.pc:hover .pc-in{background:var(--void-4)}
+
+.pc-no{font-family:'Cormorant Garamond',serif;font-size:.8rem;color:rgba(242,237,230,.14);letter-spacing:.06em;margin-bottom:42px}
+
+/* ── SVG BOTTLE ILLUSTRATIONS ── */
+.pc-vis{flex:1;display:flex;align-items:center;justify-content:center;margin-bottom:42px}
+.btl{transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.pc:hover .btl{transform:translateY(-10px) scale(1.04)}
+
+.pc-cat{font-size:.57rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:9px;transition:color .3s}
+.pc-bar{height:1.5px;width:30px;margin-bottom:18px;transition:width .55s cubic-bezier(.16,1,.3,1)}
+.pc:hover .pc-bar{width:100%}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:1.48rem;font-weight:500;color:var(--parchment);line-height:1.15;margin-bottom:13px}
+.pc-desc{font-size:.74rem;line-height:1.8;color:rgba(242,237,230,.3);margin-bottom:30px}
+.pc-tag{
+  display:inline-block;align-self:flex-start;
+  padding:7px 15px;border:1px solid;
+  font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;
+  margin-top:auto;transition:background .3s;
+}
+
+.t-serum .pc-cat,.t-serum .pc-tag{color:var(--serum);border-color:rgba(196,163,90,.28)}
+.t-serum .pc-bar{background:var(--serum)}
+.t-serum:hover .pc-tag{background:rgba(196,163,90,.07)}
+
+.t-spf .pc-cat,.t-spf .pc-tag{color:var(--spf);border-color:rgba(212,168,55,.28)}
+.t-spf .pc-bar{background:var(--spf)}
+.t-spf:hover .pc-tag{background:rgba(212,168,55,.07)}
+
+.t-moist .pc-cat,.t-moist .pc-tag{color:var(--moist);border-color:rgba(106,158,110,.28)}
+.t-moist .pc-bar{background:var(--moist)}
+.t-moist:hover .pc-tag{background:rgba(106,158,110,.07)}
+
+.t-cleanse .pc-cat,.t-cleanse .pc-tag{color:var(--cleanse);border-color:rgba(90,171,185,.28)}
+.t-cleanse .pc-bar{background:var(--cleanse)}
+.t-cleanse:hover .pc-tag{background:rgba(90,171,185,.07)}
+
+/* ─────────────────────────────────────────
+   INGREDIENTS / SCIENCE
+───────────────────────────────────────── */
+#science{background:var(--void-2)}
+.sci-layout{display:grid;grid-template-columns:360px 1fr;gap:110px;align-items:start}
+.sci-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.sci-c{
+  background:var(--void-3);padding:36px 28px;
+  position:relative;overflow:hidden;cursor:none;transition:background .3s;
+}
+.sci-c:hover{background:var(--void-4)}
+.sci-c::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--b2),transparent);
+  transform:scaleX(0);transition:transform .5s;
+}
+.sci-c:hover::before{transform:scaleX(1)}
+.sci-ico{width:46px;height:46px;margin-bottom:20px;opacity:.55;transition:opacity .3s}
+.sci-c:hover .sci-ico{opacity:1}
+.sci-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;color:var(--parchment);margin-bottom:10px}
+.sci-desc{font-size:.74rem;line-height:1.78;color:rgba(242,237,230,.34)}
+.sci-tag{
+  display:inline-block;margin-top:14px;
+  padding:4px 12px;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;
+  border:1px solid var(--b1);color:rgba(242,237,230,.28);
+}
+.sci-full{grid-column:1/-1}
+
+/* ─────────────────────────────────────────
+   ROUTINE
+───────────────────────────────────────── */
+#routine{background:var(--void)}
+.r-tabs{display:flex;border-bottom:1px solid var(--b1);margin-bottom:60px}
+.r-tab{
+  padding:14px 36px;font-family:'Jost',sans-serif;
+  font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(242,237,230,.28);background:none;
+  border:none;border-bottom:2px solid transparent;
+  cursor:none;margin-bottom:-1px;transition:color .3s,border-color .3s;
+}
+.r-tab.on{color:var(--parchment);border-bottom-color:var(--gold)}
+.r-panel{display:none}
+.r-panel.on{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+
+.r-step{background:var(--void-3);padding:52px 30px;position:relative;overflow:hidden}
+.rs-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:5.5rem;font-weight:600;font-style:italic;
+  color:rgba(242,237,230,.04);
+  position:absolute;top:8px;right:14px;line-height:1;user-select:none;
+}
+.rs-ico{
+  width:52px;height:52px;
+  background:rgba(242,237,230,.04);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:28px;
+}
+.rs-ico svg{width:24px;height:24px}
+.rs-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--parchment);margin-bottom:12px}
+.rs-desc{font-size:.74rem;line-height:1.85;color:rgba(242,237,230,.32)}
+.rs-conn{
+  position:absolute;right:-1px;top:50%;
+  width:2px;height:32px;background:var(--gold);
+  transform:translateY(-50%);opacity:.22;
+}
+.r-step:last-child .rs-conn{display:none}
+
+/* ─────────────────────────────────────────
+   WHY
+───────────────────────────────────────── */
+#why{background:var(--void-2)}
+.why-g{display:grid;grid-template-columns:1fr 1fr;gap:110px;align-items:center}
+.why-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:56px}
+.why-pill{
+  padding:10px 20px;border:1px solid var(--b1);
+  font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;
+  color:rgba(242,237,230,.45);cursor:none;
+  transition:border-color .3s,color .3s,background .3s;
+}
+.why-pill:hover{border-color:var(--gold);color:var(--gold);background:rgba(196,163,90,.05)}
+
+.why-stats{display:flex;flex-direction:column;gap:2px}
+.wsc{
+  background:var(--void-3);padding:36px 32px;
+  border-left:2px solid transparent;
+  transition:border-color .3s,background .3s;cursor:none;
+}
+.wsc:hover{border-left-color:var(--gold);background:var(--void-4)}
+.wsc-n{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:400;color:var(--parchment);line-height:1;margin-bottom:8px}
+.wsc-l{font-size:.7rem;color:rgba(242,237,230,.32);letter-spacing:.07em}
+
+/* ─────────────────────────────────────────
+   COMMUNITY
+───────────────────────────────────────── */
+#community{background:var(--void)}
+.comm-g{display:grid;grid-template-columns:1fr 1fr;gap:110px;align-items:center}
+.comm-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:48px}
+.ctag{
+  padding:10px 20px;border:1px solid var(--b1);
+  font-size:.67rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(242,237,230,.33);cursor:none;
+  transition:border-color .3s,color .3s,background .3s;
+}
+.ctag:hover{border-color:var(--gold);color:var(--gold);background:rgba(196,163,90,.04)}
+
+.comm-r{position:relative}
+.cq-wrap{position:relative;padding:32px 0 32px 32px}
+.cq{
+  background:var(--void-3);border:1px solid var(--b1);
+  padding:52px 44px;position:relative;overflow:hidden;
+}
+.cq::before{
+  content:'\201C';
+  font-family:'Cormorant Garamond',serif;font-size:180px;
+  color:rgba(242,237,230,.04);
+  position:absolute;top:-40px;left:12px;line-height:1;
+}
+.cq-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.42rem;font-style:italic;font-weight:400;
+  line-height:1.65;color:rgba(242,237,230,.68);
+  margin-bottom:32px;position:relative;
+}
+.cq-auth{display:flex;align-items:center;gap:14px;position:relative}
+.cq-ava{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--void);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--sand);
+}
+.cq-name{font-size:.78rem;color:rgba(242,237,230,.48)}
+.cq-role{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:3px}
+.cf{position:absolute;background:var(--void);border:1px solid var(--b1);padding:17px 22px}
+.cf-1{top:-24px;right:-24px}.cf-2{bottom:-24px;left:-10px}
+.cf-n{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--parchment)}
+.cf-l{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,230,.28);margin-top:4px}
+
+/* ─────────────────────────────────────────
+   SUSTAINABILITY
+───────────────────────────────────────── */
+#sustain{background:var(--void-2);border-top:1px solid var(--b1)}
+.su-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:80px}
+.su-i{background:var(--void-3);padding:52px 30px;cursor:none;transition:background .3s;position:relative;overflow:hidden}
+.su-i:hover{background:var(--void-4)}
+.su-n{font-size:.68rem;letter-spacing:.12em;color:rgba(242,237,230,.16);margin-bottom:28px}
+.su-ico{font-size:1.6rem;display:block;margin-bottom:18px;opacity:.45}
+.su-t{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:500;color:var(--parchment);margin-bottom:12px}
+.su-d{font-size:.74rem;line-height:1.78;color:rgba(242,237,230,.3)}
+
+/* ─────────────────────────────────────────
+   NEWSLETTER
+───────────────────────────────────────── */
+#nl{background:var(--void);text-align:center}
+.nl-in{max-width:640px;margin:0 auto;padding:150px 40px}
+.nl-in .kicker{justify-content:center}
+.nl-in .sec-h{text-align:center}
+.nl-in .sec-p{max-width:100%;text-align:center;margin:0 auto 54px}
+.nl-form{display:flex;max-width:460px;margin:0 auto}
+.nl-inp{
+  flex:1;background:var(--void-3);border:1px solid var(--b2);border-right:none;
+  color:var(--parchment);padding:16px 20px;
+  font-family:'Jost',sans-serif;font-size:.84rem;outline:none;
+  transition:border-color .3s;
+}
+.nl-inp::placeholder{color:rgba(242,237,230,.2)}
+.nl-inp:focus{border-color:var(--gold)}
+.nl-btn{
+  background:var(--parchment);color:var(--void);border:none;
+  padding:16px 28px;font-family:'Jost',sans-serif;
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  cursor:none;position:relative;overflow:hidden;white-space:nowrap;transition:color .4s;
+}
+.nl-btn::before{
+  content:'';position:absolute;inset:0;background:var(--gold);
+  transform:translateX(-101%);transition:transform .45s cubic-bezier(.16,1,.3,1);
+}
+.nl-btn span{position:relative;z-index:1}
+.nl-btn:hover::before{transform:translateX(0)}
+.nl-note{margin-top:18px;font-size:.6rem;letter-spacing:.1em;color:rgba(242,237,230,.16)}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer{background:var(--void);border-top:1px solid var(--b1)}
+.ft-in{max-width:1320px;margin:0 auto;padding:80px 68px 40px}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:60px;border-bottom:1px solid var(--b1)}
+.ft-brand{font-family:'Great Vibes',cursive;font-size:1.75rem;color:var(--parchment);margin-bottom:6px}
+.ft-tag{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:18px}
+.ft-desc{font-size:.77rem;line-height:1.88;color:rgba(242,237,230,.28)}
+.ft-col-h{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,230,.24);margin-bottom:22px}
+.ft-lnks{list-style:none;display:flex;flex-direction:column;gap:13px}
+.ft-lnks a{text-decoration:none;font-size:.78rem;color:rgba(242,237,230,.38);transition:color .3s}
+.ft-lnks a:hover{color:var(--parchment)}
+.ft-bot{padding-top:28px;display:flex;align-items:center;justify-content:space-between}
+.ft-copy{font-size:.66rem;color:rgba(242,237,230,.18)}
+.ft-soc{display:flex;gap:28px}
+.ft-soc a{text-decoration:none;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,230,.24);transition:color .3s}
+.ft-soc a:hover{color:var(--gold)}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media(max-width:1100px){
+  #hero{grid-template-columns:1fr}.hero-r{display:none}
+  .story-g,.sci-layout,.why-g,.comm-g{grid-template-columns:1fr}
+  .story-visual,.sv-stats{display:none}
+  .prod-grid,.su-grid{grid-template-columns:1fr 1fr}
+  .r-panel.on{grid-template-columns:1fr 1fr}
+  .ft-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  #nav{padding:18px 24px}.n-links,#nav .n-shop{display:none}
+  .wrap{padding:80px 24px}
+  .hero-l{padding:120px 24px 80px}.h-scroll{left:24px}
+  .prod-grid,.su-grid,.sci-grid,.why-pills{grid-template-columns:1fr}
+  .r-panel.on{grid-template-columns:1fr}
+  .nl-form{flex-direction:column}
+  .nl-inp{border-right:1px solid var(--b2);border-bottom:none}
+  .ft-top{grid-template-columns:1fr}.ft-in{padding:60px 24px 32px}
+  .ft-bot{flex-direction:column;gap:16px;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cur"><div id="cur-d"></div><div id="cur-r"></div></div>
+<!-- Progress -->
+<div id="prog"></div>
+
+<!-- ══════════════ NAVIGATION ══════════════ -->
+<nav id="nav">
+  <a href="#" class="n-logo">
+    <span class="n-logo-script">with </span>
+    <span class="n-logo-z">Z</span>
+    <span class="n-logo-script"> skin</span>
+  </a>
+  <ul class="n-links">
+    <li><a href="#products">Collection</a></li>
+    <li><a href="#science">Science</a></li>
+    <li><a href="#routine">Routine</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+  <button class="n-shop"><span>Shop Now</span></button>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <div class="atm atm-a"></div>
+  <div class="atm atm-b"></div>
+  <div class="atm atm-c"></div>
+
+  <div class="hero-l">
+    <p class="h-eyebrow">Generation Z Skincare</p>
+    <h1 class="h-title">
+      <span class="row"><span class="row-in r0"><em>with</em></span></span>
+      <span class="row"><span class="row-in r1"><span class="z-gold">Z</span></span></span>
+      <span class="row"><span class="row-in r2">skin</span></span>
+    </h1>
+    <p class="h-tag">Your Skin. Our Science.</p>
+    <div class="h-copy">
+      <p>Skincare is no longer just a routine.</p>
+      <p>It is confidence before a presentation.</p>
+      <p>It is healing after long nights.</p>
+      <p>It is the quiet moment before the world begins.</p>
+    </div>
+    <div class="h-ctas">
+      <a href="#products" class="btn-p"><span>Explore Collection &nbsp;→</span></a>
+      <a href="#routine" class="btn-g">Take Skin Quiz &nbsp;→</a>
+    </div>
+  </div>
+
+  <div class="hero-r">
+    <div class="hero-r-wrap">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ghost-z">Z</div>
+      <div class="hero-tiles">
+        <div class="htile ht-a"><div class="htile-dot td-a"></div><div class="htile-cat">Actives</div><div class="htile-name">Vitamin C<br>Serum</div></div>
+        <div class="htile ht-b"><div class="htile-dot td-b"></div><div class="htile-cat">Protection</div><div class="htile-name">SPF 50+<br>Sunscreen</div></div>
+        <div class="htile ht-c"><div class="htile-dot td-c"></div><div class="htile-cat">Hydration</div><div class="htile-name">Moistu-<br>riser</div></div>
+        <div class="htile ht-d"><div class="htile-dot td-d"></div><div class="htile-cat">Cleanse</div><div class="htile-name">Gentle<br>Cleanser</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-scroll">
+    <div class="hs-bar"></div>
+    <span class="hs-lbl">Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ══════════════ TICKER ══════════════ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-seg">
+      <span class="tick-w">Your Skin. Our Science.</span><span class="tick-gem"></span>
+      <span class="tick-w">Minimal × Luxury × Science</span><span class="tick-gem"></span>
+      <span class="tick-w">Vitamin C Brightening</span><span class="tick-gem"></span>
+      <span class="tick-w">SPF 50+ Broad Spectrum</span><span class="tick-gem"></span>
+      <span class="tick-w">Hyaluronic Acid</span><span class="tick-gem"></span>
+      <span class="tick-w">Ceramide Barrier</span><span class="tick-gem"></span>
+      <span class="tick-w">Gen-Z Formulated</span><span class="tick-gem"></span>
+      <span class="tick-w">Dermatologist Backed</span><span class="tick-gem"></span>
+    </div>
+    <div class="ticker-seg" aria-hidden="true">
+      <span class="tick-w">Your Skin. Our Science.</span><span class="tick-gem"></span>
+      <span class="tick-w">Minimal × Luxury × Science</span><span class="tick-gem"></span>
+      <span class="tick-w">Vitamin C Brightening</span><span class="tick-gem"></span>
+      <span class="tick-w">SPF 50+ Broad Spectrum</span><span class="tick-gem"></span>
+      <span class="tick-w">Hyaluronic Acid</span><span class="tick-gem"></span>
+      <span class="tick-w">Ceramide Barrier</span><span class="tick-gem"></span>
+      <span class="tick-w">Gen-Z Formulated</span><span class="tick-gem"></span>
+      <span class="tick-w">Dermatologist Backed</span><span class="tick-gem"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ STORY ══════════════ -->
+<section id="story">
+  <div class="wrap">
+    <div class="story-g">
+      <div>
+        <p class="kicker rv">Our Story</p>
+        <h2 class="sec-h rv d1">Born for<br><em>Generation Z</em></h2>
+        <p class="sec-p rv d2">The beauty industry often speaks in perfection. We do not. with Z skin was built for people navigating university life, late-night study sessions, stress, ambition, and self-discovery.</p>
+        <div class="beliefs rv d3">
+          <div class="belief"><span class="belief-t">Healthy skin &gt; perfect skin</span><span class="belief-arr">→</span></div>
+          <div class="belief"><span class="belief-t">Progress &gt; perfection</span><span class="belief-arr">→</span></div>
+          <div class="belief"><span class="belief-t">Consistency &gt; trends</span><span class="belief-arr">→</span></div>
+          <div class="belief"><span class="belief-t">Science meets individuality</span><span class="belief-arr">→</span></div>
+        </div>
+      </div>
+      <div class="story-visual rv d4">
+        <div class="sv-frame">
+          <div class="sv-z">Z</div>
+          <div class="sv-gold-line"></div>
+          <div class="sv-caption">Minimal outside. Powerful inside.</div>
+        </div>
+        <div class="sv-stats">
+          <div class="sv-stat"><div class="sv-num">4</div><div class="sv-lbl">Core Products</div></div>
+          <div class="sv-stat"><div class="sv-num">100%</div><div class="sv-lbl">Science-backed</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PRODUCTS ══════════════ -->
+<section id="products">
+  <div class="wrap">
+    <div class="prod-hdr rv">
+      <div>
+        <p class="kicker">The Collection</p>
+        <h2 class="sec-h rv d1">Product<br><em>Ecosystem</em></h2>
+      </div>
+      <p class="prod-hdr-r">Every formula intentionally created to support real skin, real routines, and real people.</p>
+    </div>
+    <div class="prod-grid">
+
+      <!-- SERUM -->
+      <div class="pc t-serum rv">
+        <div class="pc-in">
+          <div class="pc-no">01</div>
+          <div class="pc-vis">
+            <div class="btl">
+              <svg width="80" height="200" viewBox="0 0 80 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Dropper tip -->
+                <rect x="38" y="0" width="4" height="16" rx="2" fill="#1a1a1a"/>
+                <!-- Bulb -->
+                <ellipse cx="40" cy="26" rx="14" ry="16" fill="#181818" stroke="rgba(242,237,230,0.08)" stroke-width="1"/>
+                <!-- Neck -->
+                <rect x="37" y="40" width="6" height="20" fill="#151515"/>
+                <!-- Body -->
+                <rect x="20" y="58" width="40" height="112" rx="5" fill="#1e1a10" stroke="rgba(242,237,230,0.07)" stroke-width="1"/>
+                <!-- Label -->
+                <rect x="24" y="64" width="32" height="80" rx="2" fill="#f3f1ec"/>
+                <!-- Brand script -->
+                <text x="40" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="6" font-style="italic" fill="#0f0f0f">with Z skin</text>
+                <!-- Category -->
+                <text x="40" y="90" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.5" fill="#888" letter-spacing="1">ACTIVES</text>
+                <!-- Name -->
+                <text x="40" y="103" text-anchor="middle" font-family="Georgia,serif" font-size="8.5" font-weight="bold" fill="#0f0f0f">Vitamin C</text>
+                <text x="40" y="113" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#222">Brightening</text>
+                <!-- Gold bar -->
+                <rect x="24" y="118" width="32" height="1.5" fill="#C4A35A" opacity="0.9"/>
+                <!-- Subtitle -->
+                <text x="40" y="128" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.5" fill="#777">Sodium Ascorbyl Phos. 10%</text>
+                <!-- ml -->
+                <text x="40" y="140" text-anchor="middle" font-family="Arial,sans-serif" font-size="4" fill="#aaa">30ml</text>
+                <!-- Bottom cap -->
+                <rect x="22" y="170" width="36" height="8" rx="2" fill="#141414"/>
+              </svg>
+            </div>
+          </div>
+          <div class="pc-cat">Activation</div>
+          <div class="pc-bar"></div>
+          <h3 class="pc-name">Vitamin C<br>Brightening Serum</h3>
+          <p class="pc-desc">10% Sodium Ascorbyl Phosphate. Glow powered by science. Fast-absorbing daily formula.</p>
+          <span class="pc-tag">30ml &nbsp;·&nbsp; Explore →</span>
+        </div>
+      </div>
+
+      <!-- SPF -->
+      <div class="pc t-spf rv d1">
+        <div class="pc-in">
+          <div class="pc-no">02</div>
+          <div class="pc-vis">
+            <div class="btl">
+              <svg width="80" height="200" viewBox="0 0 80 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cap top -->
+                <rect x="24" y="10" width="32" height="22" rx="4" fill="#e8e8e8"/>
+                <rect x="32" y="30" width="16" height="10" rx="2" fill="#d0d0d0"/>
+                <!-- Body -->
+                <rect x="20" y="38" width="40" height="130" rx="5" fill="#141414" stroke="rgba(242,237,230,0.08)" stroke-width="1"/>
+                <!-- Label -->
+                <rect x="24" y="46" width="32" height="84" rx="2" fill="#f3f1ec"/>
+                <text x="40" y="62" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" font-style="italic" fill="#0f0f0f">with Z skin</text>
+                <text x="40" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.5" fill="#888" letter-spacing="1">PROTECTION</text>
+                <text x="40" y="84" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#0f0f0f">SPF 50+</text>
+                <text x="40" y="95" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#333">Sunscreen</text>
+                <rect x="24" y="100" width="32" height="1.5" fill="#D4A837" opacity="0.9"/>
+                <text x="40" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.5" fill="#777">Broad Spectrum UVA UVB</text>
+                <text x="40" y="124" text-anchor="middle" font-family="Arial,sans-serif" font-size="4" fill="#aaa">60g</text>
+              </svg>
+            </div>
+          </div>
+          <div class="pc-cat">Protection</div>
+          <div class="pc-bar"></div>
+          <h3 class="pc-name">SPF 50+<br>Sunscreen</h3>
+          <p class="pc-desc">Broad Spectrum UVA/UVB. Weightless, non-greasy, zero white cast. Invisible daily defence.</p>
+          <span class="pc-tag">60g &nbsp;·&nbsp; Explore →</span>
+        </div>
+      </div>
+
+      <!-- MOISTURISER -->
+      <div class="pc t-moist rv d2">
+        <div class="pc-in">
+          <div class="pc-no">03</div>
+          <div class="pc-vis">
+            <div class="btl">
+              <svg width="80" height="200" viewBox="0 0 80 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Body rounded tube -->
+                <rect x="18" y="30" width="44" height="128" rx="8" fill="#141414" stroke="rgba(242,237,230,0.08)" stroke-width="1"/>
+                <!-- Label -->
+                <rect x="23" y="38" width="34" height="84" rx="3" fill="#f3f1ec"/>
+                <text x="40" y="54" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" font-style="italic" fill="#0f0f0f">with Z skin</text>
+                <text x="40" y="64" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.5" fill="#888" letter-spacing="1">HYDRATION</text>
+                <text x="40" y="78" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#0f0f0f">Moisturiser</text>
+                <text x="40" y="90" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.8" fill="#666">Hyaluronic Acid +</text>
+                <text x="40" y="98" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.8" fill="#666">Niacinamide 5%</text>
+                <rect x="23" y="103" width="34" height="1.5" fill="#6A9E6E" opacity="0.9"/>
+                <text x="40" y="115" text-anchor="middle" font-family="Arial,sans-serif" font-size="4" fill="#aaa">50ml</text>
+                <!-- Flip cap -->
+                <rect x="30" y="158" width="20" height="12" rx="3" fill="#e0e0e0"/>
+              </svg>
+            </div>
+          </div>
+          <div class="pc-cat">Hydration</div>
+          <div class="pc-bar"></div>
+          <h3 class="pc-name">Moistu-<br>riser</h3>
+          <p class="pc-desc">Hyaluronic Acid + Niacinamide 5%. Balanced hydration with a lightweight silk finish.</p>
+          <span class="pc-tag">50ml &nbsp;·&nbsp; Explore →</span>
+        </div>
+      </div>
+
+      <!-- CLEANSER -->
+      <div class="pc t-cleanse rv d3">
+        <div class="pc-in">
+          <div class="pc-no">04</div>
+          <div class="pc-vis">
+            <div class="btl">
+              <svg width="80" height="200" viewBox="0 0 80 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Pump mechanism -->
+                <rect x="36" y="2" width="8" height="22" rx="3" fill="#1e1e1e"/>
+                <rect x="28" y="20" width="24" height="7" rx="2" fill="#1e1e1e"/>
+                <rect x="44" y="8" width="22" height="5" rx="2" fill="#1e1e1e" transform="rotate(-8 44 8)"/>
+                <!-- Bottle body -->
+                <rect x="18" y="26" width="44" height="150" rx="22" fill="#141414" stroke="rgba(242,237,230,0.07)" stroke-width="1"/>
+                <!-- Label -->
+                <rect x="24" y="40" width="32" height="92" rx="3" fill="#f3f1ec"/>
+                <text x="40" y="56" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" font-style="italic" fill="#0f0f0f">with Z skin</text>
+                <text x="40" y="66" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.5" fill="#888" letter-spacing="1">CLEANSE</text>
+                <text x="40" y="79" text-anchor="middle" font-family="Georgia,serif" font-size="9.5" font-weight="bold" fill="#0f0f0f">Gentle</text>
+                <text x="40" y="91" text-anchor="middle" font-family="Georgia,serif" font-size="9.5" fill="#222">Cleanser</text>
+                <text x="40" y="102" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.5" fill="#666">Ceramides + Panthenol</text>
+                <rect x="24" y="107" width="32" height="1.5" fill="#5AABB9" opacity="0.9"/>
+                <text x="40" y="118" text-anchor="middle" font-family="Arial,sans-serif" font-size="3.8" fill="#888">All Skin Types</text>
+                <text x="40" y="130" text-anchor="middle" font-family="Arial,sans-serif" font-size="4" fill="#aaa">200ml</text>
+              </svg>
+            </div>
+          </div>
+          <div class="pc-cat">Cleanse</div>
+          <div class="pc-bar"></div>
+          <h3 class="pc-name">Gentle<br>Cleanser</h3>
+          <p class="pc-desc">Ceramides + Panthenol. All skin types. Barrier-supporting daily cleanser. AM &amp; PM.</p>
+          <span class="pc-tag">200ml &nbsp;·&nbsp; Explore →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SCIENCE ══════════════ -->
+<section id="science">
+  <div class="wrap">
+    <div class="sci-layout">
+      <div class="rv">
+        <p class="kicker">Science Lab</p>
+        <h2 class="sec-h">Our<br><em>Ingredients</em><br>Philosophy</h2>
+        <p class="sec-p" style="margin-top:24px">We do not chase trends. We formulate intentionally. Every ingredient exists for a reason — selected for efficacy, safety, and skin compatibility.</p>
+      </div>
+      <div class="sci-grid">
+        <div class="sci-c rv d1">
+          <svg class="sci-ico" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#C4A35A" stroke-width="1.5"/><path d="M24 12L28 20L24 28L20 20Z" fill="#C4A35A" opacity=".3"/><circle cx="24" cy="24" r="5" fill="#C4A35A" opacity=".5"/><line x1="24" y1="6" x2="24" y2="10" stroke="#C4A35A" stroke-width="1.5"/><line x1="24" y1="38" x2="24" y2="42" stroke="#C4A35A" stroke-width="1.5"/><line x1="6" y1="24" x2="10" y2="24" stroke="#C4A35A" stroke-width="1.5"/><line x1="38" y1="24" x2="42" y2="24" stroke="#C4A35A" stroke-width="1.5"/><line x1="9.51" y1="9.51" x2="12.34" y2="12.34" stroke="#C4A35A" stroke-width="1.5"/><line x1="35.66" y1="35.66" x2="38.49" y2="38.49" stroke="#C4A35A" stroke-width="1.5"/><line x1="38.49" y1="9.51" x2="35.66" y2="12.34" stroke="#C4A35A" stroke-width="1.5"/><line x1="12.34" y1="35.66" x2="9.51" y2="38.49" stroke="#C4A35A" stroke-width="1.5"/></svg>
+          <div class="sci-name">Vitamin C</div>
+          <div class="sci-desc">Sodium Ascorbyl Phosphate 10%. Supports radiance and brightness with superior stability over ascorbic acid.</div>
+          <span class="sci-tag">Activation</span>
+        </div>
+        <div class="sci-c rv d2">
+          <svg class="sci-ico" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="2" stroke="#6A9E6E" stroke-width="1.5"/><path d="M16 24Q24 14 32 24Q24 34 16 24Z" fill="#6A9E6E" opacity=".25"/><rect x="22" y="12" width="4" height="24" rx="2" fill="#6A9E6E" opacity=".5"/></svg>
+          <div class="sci-name">Niacinamide</div>
+          <div class="sci-desc">5% concentration. Supports texture refinement, minimises pore appearance and balances uneven skin tone.</div>
+          <span class="sci-tag">Hydration</span>
+        </div>
+        <div class="sci-c rv d3">
+          <svg class="sci-ico" viewBox="0 0 48 48" fill="none"><path d="M24 6C24 6 11 22 11 31A13 13 0 0 0 37 31C37 22 24 6 24 6Z" stroke="#5AABB9" stroke-width="1.5" fill="rgba(90,171,185,0.12)"/><path d="M24 20C24 20 17 28 17 33A7 7 0 0 0 31 33C31 28 24 20 24 20Z" fill="#5AABB9" opacity=".3"/></svg>
+          <div class="sci-name">Hyaluronic Acid</div>
+          <div class="sci-desc">Attracts and locks in moisture deep within the skin for smooth, supple, long-lasting hydration.</div>
+          <span class="sci-tag">Hydration</span>
+        </div>
+        <div class="sci-c rv d4">
+          <svg class="sci-ico" viewBox="0 0 48 48" fill="none"><path d="M10 38Q24 8 38 38" stroke="#9B7A76" stroke-width="1.5" fill="none"/><path d="M16 32Q24 14 32 32" fill="rgba(155,122,118,0.18)" stroke="#9B7A76" stroke-width="1"/><circle cx="24" cy="35" r="4" fill="#9B7A76" opacity=".5"/></svg>
+          <div class="sci-name">Ceramides</div>
+          <div class="sci-desc">Reinforces the skin's natural lipid barrier to prevent water loss and shield against environmental stressors.</div>
+          <span class="sci-tag">Cleanse</span>
+        </div>
+        <div class="sci-c sci-full rv d5">
+          <svg class="sci-ico" viewBox="0 0 48 48" fill="none" style="display:inline-block"><path d="M8 38L24 12L40 38" stroke="#D3C3AF" stroke-width="1.5" fill="none"/><path d="M14 30L24 14L34 30" fill="rgba(211,195,175,0.15)" stroke="#D3C3AF" stroke-width="1"/><line x1="10" y1="38" x2="38" y2="38" stroke="#D3C3AF" stroke-width="1.5"/></svg>
+          <div class="sci-name">Panthenol — Pro-Vitamin B5</div>
+          <div class="sci-desc">Soothes, conditions, and locks in moisture. Supports skin comfort and a calmed, soft finish across all skin types — from sensitive to oily combination skin.</div>
+          <span class="sci-tag">Cleanse</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ROUTINE ══════════════ -->
+<section id="routine">
+  <div class="wrap">
+    <p class="kicker rv">Skin Journey</p>
+    <h2 class="sec-h rv d1">Your Daily <em>Ritual</em></h2>
+    <p class="sec-p rv d2" style="margin-bottom:56px">A complete routine crafted for morning and evening. Each step layered intentionally for maximum, lasting results.</p>
+    <div class="r-tabs rv d3">
+      <button class="r-tab on" onclick="switchR(this,'am')">Morning Ritual</button>
+      <button class="r-tab" onclick="switchR(this,'pm')">Evening Ritual</button>
+    </div>
+    <div id="am" class="r-panel on">
+      <div class="r-step rv"><div class="rs-n">01</div><div class="rs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(242,237,230,0.38)" stroke-width="1.2"><path d="M12 3C7.5 3 4 7 4 12S7.5 21 12 21S20 17 20 12S16.5 3 12 3Z"/><path d="M9 17Q12 8 15 17" fill="rgba(242,237,230,0.08)"/></svg></div><div class="rs-title">Cleanse</div><p class="rs-desc">Begin with the Gentle Cleanser. Remove overnight build-up and refresh skin, preserving its natural ceramide barrier.</p><div class="rs-conn"></div></div>
+      <div class="r-step rv d1"><div class="rs-n">02</div><div class="rs-ico" style="border-color:rgba(196,163,90,.3)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="#C4A35A" stroke-width="1.2"/><line x1="12" y1="2" x2="12" y2="5" stroke="#C4A35A" stroke-width="1.2"/><line x1="12" y1="19" x2="12" y2="22" stroke="#C4A35A" stroke-width="1.2"/><line x1="2" y1="12" x2="5" y2="12" stroke="#C4A35A" stroke-width="1.2"/><line x1="19" y1="12" x2="22" y2="12" stroke="#C4A35A" stroke-width="1.2"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05" stroke="#C4A35A" stroke-width="1.2"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07" stroke="#C4A35A" stroke-width="1.2"/><line x1="19.07" y1="4.93" x2="16.95" y2="7.05" stroke="#C4A35A" stroke-width="1.2"/><line x1="7.05" y1="16.95" x2="4.93" y2="19.07" stroke="#C4A35A" stroke-width="1.2"/></svg></div><div class="rs-title">Vitamin C Serum</div><p class="rs-desc">Apply 3–4 drops of the Brightening Serum. Pat gently and allow full absorption to awaken your natural glow.</p><div class="rs-conn"></div></div>
+      <div class="r-step rv d2"><div class="rs-n">03</div><div class="rs-ico" style="border-color:rgba(106,158,110,.3)"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4C12 4 6 12 6 16A6 6 0 0 0 18 16C18 12 12 4 12 4Z" stroke="#6A9E6E" stroke-width="1.2"/><path d="M12 12C12 12 9 16 9 18A3 3 0 0 0 15 18C15 16 12 12 12 12Z" fill="rgba(106,158,110,.3)"/></svg></div><div class="rs-title">Moisturise</div><p class="rs-desc">Apply the Moisturiser to lock in hydration. Niacinamide and Hyaluronic Acid balance and plump skin.</p><div class="rs-conn"></div></div>
+      <div class="r-step rv d3"><div class="rs-n">04</div><div class="rs-ico" style="border-color:rgba(212,168,55,.3)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#D4A837" stroke-width="1.2" stroke-dasharray="2 2"/><circle cx="12" cy="12" r="4" fill="rgba(212,168,55,.2)" stroke="#D4A837" stroke-width="1.2"/></svg></div><div class="rs-title">SPF Protection</div><p class="rs-desc">Finish with SPF 50+. Invisible broad-spectrum UVA/UVB shield for everything the day brings.</p></div>
+    </div>
+    <div id="pm" class="r-panel">
+      <div class="r-step rv"><div class="rs-n">01</div><div class="rs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(242,237,230,0.38)" stroke-width="1.2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div><div class="rs-title">Double Cleanse</div><p class="rs-desc">The evening cleanse is essential. Remove SPF, pollution, and the full weight of the day with Gentle Cleanser.</p><div class="rs-conn"></div></div>
+      <div class="r-step rv d1"><div class="rs-n">02</div><div class="rs-ico" style="border-color:rgba(196,163,90,.3)"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4C12 4 6 12 6 16A6 6 0 0 0 18 16C18 12 12 4 12 4Z" stroke="#C4A35A" stroke-width="1.2"/></svg></div><div class="rs-title">Vitamin C Serum</div><p class="rs-desc">Apply serum to support overnight skin renewal. Vitamin C continues brightening while you sleep.</p><div class="rs-conn"></div></div>
+      <div class="r-step rv d2"><div class="rs-n">03</div><div class="rs-ico" style="border-color:rgba(106,158,110,.3)"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4C12 4 6 12 6 16A6 6 0 0 0 18 16C18 12 12 4 12 4Z" stroke="#6A9E6E" stroke-width="1.2"/><path d="M12 12C12 12 9 16 9 18A3 3 0 0 0 15 18C15 16 12 12 12 12Z" fill="rgba(106,158,110,.3)"/></svg></div><div class="rs-title">Hydrate & Recover</div><p class="rs-desc">Apply Moisturiser generously. Hyaluronic Acid and Niacinamide restore balance and softness overnight.</p><div class="rs-conn"></div></div>
+      <div class="r-step rv d3"><div class="rs-n">04</div><div class="rs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(242,237,230,0.38)" stroke-width="1.2"><path d="M5 12L12 5L19 12L12 19Z"/><circle cx="12" cy="12" r="3" fill="rgba(242,237,230,0.1)"/></svg></div><div class="rs-title">Rest & Repeat</div><p class="rs-desc">Consistency is the formula. Skin heals in sleep. Repeat every night. Wake to better skin, every morning.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WHY ══════════════ -->
+<section id="why">
+  <div class="wrap">
+    <div class="why-g">
+      <div>
+        <p class="kicker rv">Why with Z skin</p>
+        <h2 class="sec-h rv d1">The <em>Difference</em><br>is Clear</h2>
+        <p class="sec-p rv d2">Every choice — from formula to finish — made with one person in mind: you, navigating real life with real skin.</p>
+        <div class="why-pills rv d3">
+          <span class="why-pill">Minimal Formulation</span>
+          <span class="why-pill">Science Inspired</span>
+          <span class="why-pill">Premium Aesthetics</span>
+          <span class="why-pill">Gen-Z Focused</span>
+          <span class="why-pill">Routine Optimised</span>
+          <span class="why-pill">Clean Identity</span>
+          <span class="why-pill">Modern Skincare</span>
+        </div>
+      </div>
+      <div class="why-stats rv d2">
+        <div class="wsc"><div class="wsc-n">4</div><div class="wsc-l">Core products for a complete daily system</div></div>
+        <div class="wsc"><div class="wsc-n">5+</div><div class="wsc-l">Active science-backed ingredients</div></div>
+        <div class="wsc"><div class="wsc-n">2×</div><div class="wsc-l">AM &amp; PM rituals — morning and evening</div></div>
+        <div class="wsc"><div class="wsc-n">∞</div><div class="wsc-l">Formulated for every skin story</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ COMMUNITY ══════════════ -->
+<section id="community">
+  <div class="wrap">
+    <div class="comm-g">
+      <div>
+        <p class="kicker rv">The Community</p>
+        <h2 class="sec-h rv d1">More than<br><em>skincare.</em></h2>
+        <p class="sec-p rv d2">with Z skin is a community of people building themselves while building their future. Everyone navigating growth.</p>
+        <div class="comm-tags rv d3">
+          <span class="ctag">Late-Night Students</span>
+          <span class="ctag">Creators</span>
+          <span class="ctag">Dreamers</span>
+          <span class="ctag">Gamers</span>
+          <span class="ctag">Professionals</span>
+          <span class="ctag">Artists</span>
+          <span class="ctag">Builders</span>
+          <span class="ctag">Thinkers</span>
+        </div>
+      </div>
+      <div class="comm-r rv d2">
+        <div class="cq-wrap">
+          <div class="cq">
+            <p class="cq-text">"Skincare finally designed for how I actually live — not how the industry thinks I should."</p>
+            <div class="cq-auth">
+              <div class="cq-ava">Z</div>
+              <div><div class="cq-name">Iraj, University Student</div><div class="cq-role">Community Member</div></div>
+            </div>
+          </div>
+          <div class="cf cf-1"><div class="cf-n">Gen Z</div><div class="cf-l">Formulated For</div></div>
+          <div class="cf cf-2"><div class="cf-n">4-Step</div><div class="cf-l">Complete System</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SUSTAINABILITY ══════════════ -->
+<section id="sustain">
+  <div class="wrap">
+    <p class="kicker rv">Our Vision</p>
+    <h2 class="sec-h rv d1">Beauty Shouldn't<br>Cost the <em>Future</em></h2>
+    <div class="su-grid">
+      <div class="su-i rv"><div class="su-n">01</div><span class="su-ico">◻</span><div class="su-t">Responsible Packaging</div><p class="su-d">Minimal, purposeful packaging that reduces material without compromising the premium experience.</p></div>
+      <div class="su-i rv d1"><div class="su-n">02</div><span class="su-ico">◇</span><div class="su-t">Reduced Waste</div><p class="su-d">Every design decision considers end-of-life. Less waste in the supply chain and your bathroom.</p></div>
+      <div class="su-i rv d2"><div class="su-n">03</div><span class="su-ico">○</span><div class="su-t">Conscious Sourcing</div><p class="su-d">Ingredients selected with care for environmental impact, traceability, and ethical supply chains.</p></div>
+      <div class="su-i rv d3"><div class="su-n">04</div><span class="su-ico">△</span><div class="su-t">Minimal Footprint</div><p class="su-d">Concentrated, efficacious formulas mean less product per use — and less environmental impact overall.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ NEWSLETTER ══════════════ -->
+<section id="nl">
+  <div class="nl-in">
+    <p class="kicker rv">Stay Connected</p>
+    <h2 class="sec-h rv d1">Stay <em>with Z</em></h2>
+    <p class="sec-p rv d2">Skincare insights, product launches, routine guides, community updates, and exclusive drops — directly to you.</p>
+    <div class="nl-form rv d3">
+      <input class="nl-inp" type="email" placeholder="Enter your email"/>
+      <button class="nl-btn"><span>Join Community</span></button>
+    </div>
+    <p class="nl-note rv d4">No spam. Unsubscribe anytime. We respect your inbox.</p>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-top">
+      <div>
+        <div class="ft-brand">with Z skin</div>
+        <span class="ft-tag">Your Skin. Our Science.</span>
+        <p class="ft-desc">Modern skincare for the generation that values authenticity, transparency, and results. Minimal outside. Powerful inside.</p>
+      </div>
+      <div>
+        <div class="ft-col-h">Products</div>
+        <ul class="ft-lnks">
+          <li><a href="#">Vitamin C Serum</a></li>
+          <li><a href="#">SPF 50+ Sunscreen</a></li>
+          <li><a href="#">Moisturiser</a></li>
+          <li><a href="#">Gentle Cleanser</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-h">Brand</div>
+        <ul class="ft-lnks">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Science Lab</a></li>
+          <li><a href="#">Ingredients</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Community</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-h">Connect</div>
+        <ul class="ft-lnks">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Pinterest</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Email Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2025 with Z skin. All rights reserved.</p>
+      <div class="ft-soc">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Pinterest</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const cd=document.getElementById('cur-d'),cr=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cd.style.left=mx+'px';cd.style.top=my+'px';
+});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.pc,.sci-c,.belief,.ctag,.why-pill,.su-i,.htile,.wsc,.cq').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+/* ── PROGRESS ── */
+const pg=document.getElementById('prog');
+window.addEventListener('scroll',()=>{pg.style.width=(window.scrollY/(document.body.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+
+/* ── NAV ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('on',scrollY>50),{passive:true});
+
+/* ── REVEAL ── */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ── ROUTINE TABS ── */
+function switchR(btn,id){
+  document.querySelectorAll('.r-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.r-panel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  const panel=document.getElementById(id);
+  panel.classList.add('on');
+  panel.querySelectorAll('.rv').forEach(el=>{el.classList.remove('in');setTimeout(()=>io.observe(el),40)});
+}
+
+/* ── SMOOTH ANCHORS ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
+});
+
+/* ── PARALLAX BLOBS ── */
+window.addEventListener('scroll',()=>{
+  const y=scrollY;
+  document.querySelectorAll('.atm').forEach((b,i)=>{b.style.transform=`translateY(${y*[.22,.16,.12][i]}px)`});
+},{passive:true});
+</script>
+</body>
+</html>
